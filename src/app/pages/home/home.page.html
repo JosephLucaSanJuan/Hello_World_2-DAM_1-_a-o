@@ -1,0 +1,33 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-button fill="clear" aria-label="New User" (click)="onNewUser()">
+    <ion-icon slot="icon-only"  color="primary"  name="add-outline" aria-hidden="true"></ion-icon>
+  </ion-button>
+  <div class="users-panel">
+    <app-user-info 
+      appHighLight
+      *ngFor="let user of ((users.users$ | async) | favs:(favs.favs$ | async));let i = index" 
+      [user]="user" 
+      (onCardClicked)="onCardClicked(user)" 
+      (onFavClicked)="onFavClicked(user, $event)"
+      (onDeleteClicked)="onDeleteClicked(user)"
+      >
+    </app-user-info>
+  </div>
+  <ion-loading [isOpen]="loading" class="custom-loading"  message="Loading..." ></ion-loading>
+  
+  
+</ion-content>
